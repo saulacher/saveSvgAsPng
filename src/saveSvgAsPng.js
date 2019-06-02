@@ -21,7 +21,7 @@
   const isElement = obj => obj instanceof HTMLElement || obj instanceof SVGElement;
   const requireDomNode = el => {
     if (!isElement(el)) throw new Error(`an HTMLElement or SVGElement is required; got ${el}`);
-  };
+  }; 
   const requireDomNodePromise = el =>
     new Promise((resolve, reject) => {
       if (isElement(el)) resolve(el)
@@ -381,14 +381,15 @@
   };
 
   out$.saveSvg = (el, name, options) => {
-    const downloadOpts = downloadOptions(); // don't inline, can't be async
+    //const downloadOpts = downloadOptions(); // don't inline, can't be async
     return requireDomNodePromise(el)
       .then(el => out$.svgAsDataUri(el, options || {}))
       .then(uri => out$.download(name, uri, downloadOpts));
   };
 
   out$.saveSvgAsPng = (el, name, options) => {
-    const downloadOpts = downloadOptions(); // don't inline, can't be async
+   // const downloadOpts = downloadOptions(); // don't inline, can't be async
+    var popup = window.open()
     return requireDomNodePromise(el)
       .then(el => out$.svgAsPngUri(el, options || {}))
       .then(uri => out$.download(name, uri, downloadOpts));
